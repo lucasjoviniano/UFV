@@ -1,0 +1,21 @@
+Etapa 1
+Fila original
+1999
+1890
+1764
+1386
+1128
+977
+927
+873
+862
+726
+601
+378
+376
+338
+285
+235
+Tamanho maximo da fila: 1000
+Numero de push(): 1000
+Numero de pop(): 1000

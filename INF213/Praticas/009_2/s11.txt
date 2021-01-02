@@ -1,0 +1,14 @@
+Etapa 1
+Fila original
+15
+5
+10
+4
+7
+200
+200
+40
+7
+Tamanho maximo da fila: 5
+Numero de push(): 7
+Numero de pop(): 4

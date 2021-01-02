@@ -1,0 +1,7 @@
+Etapa 1
+Fila nova
+1956
+567
+Tamanho maximo da fila: 100
+Numero de push(): 100
+Numero de pop(): 100

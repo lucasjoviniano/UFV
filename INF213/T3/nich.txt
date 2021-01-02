@@ -1,0 +1,19 @@
+COMECO_TREINO
+Oi como voce esta.
+voce vai aa.
+voce vai zzz.
+voce vai zbc.
+voce vai zat.
+voce vai viajar. 
+voce vai tambem.
+voce vai amanha.
+voce vai zozo.
+voce vai zz.
+
+como voce vai.
+FINAL_TREINO
+consultar 3 voce
+consultar 3 voce vai
+consultar 3 voce vai tambem
+consultar 3
+gerar 3 padrao oi

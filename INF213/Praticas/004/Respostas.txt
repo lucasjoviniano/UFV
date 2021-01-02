@@ -1,0 +1,25 @@
+1)  Pertence: O(A.num_elementos)
+    Insere: O(n)
+    numElementos: O(1)
+    +: O(A.num_elementos + B.num_elementos)
+    *: O(B.num_elementos)
+    -: O(A.num_elementos)
+
+2) Não, o operador irá tentar colocar todos os elementos presentes nos dois conjuntos,
+porém alguns irão falhar por serem repetidos.
+
+3)  10: 0.00s
+    100: 0.00s
+    1000: 0.04s
+    5000: 0.22s
+    10000: 0.78s
+    20000: 3.02s
+    40000: 11.72s
+
+    Cada vez que dobramos o tamanho da entrada, o tempo aumenta em aprox. 4 vezes
+
+4) Sim, o tempo cresce cada vez mais rápido. Isso acontece pela falta de elementos repetidos nos dois
+conjuntos, como todos os elementos são repetidos, a função pertence chamada dentro da função insere
+deverá percorrer todo o array para cada elemento.
+
+5) Os tempos de execução ficaram bem menores (da ordem de 6 vezes mais rápido)
