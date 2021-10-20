@@ -1,0 +1,3 @@
+/home/lucasjoviniano/Documents/UFV/INF230/Trabalho1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/lucasjoviniano/Documents/UFV/INF230/Trabalho1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/lucasjoviniano/Documents/UFV/INF230/Trabalho1/cmake-build-debug/CMakeFiles/Trabalho1.dir

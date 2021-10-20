@@ -39,7 +39,6 @@ public class Campeonato {
 
     public String resultado() {
         Collections.sort(times);
-
         return times.stream().map(time -> Integer.toString(time.id)).collect(Collectors.joining(" "));
     }
 
