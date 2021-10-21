@@ -15,7 +15,17 @@ def main():
 
     d: int = get_d(e, phi)
 
+    message = 'TAYLORSWIFTRAINHADOPOP'
+
     print("P: {}, Q: {}, E: {}, D: {}".format(p, q, e, d))
+
+    coded = encode(message, n, e)
+
+    print(coded)
+
+    decoded = decode(coded, d, n)
+
+    print(decoded)
 
 
 def get_e(phi: int) -> int:
@@ -33,6 +43,73 @@ def get_d(e: int, phi: int) -> int:
         return s + phi
 
     return s
+
+
+def encode(message: str, key: int, e: int) -> [str]:
+    block_size = get_block_size(key)
+
+    blocks = []
+    k = 0
+
+    print("Generating Blocks")
+
+    for _ in message:
+        block = []
+        while len(block) < block_size and k < len(message):
+            block.append(get_char_code(message[k]))
+            k += 1
+
+        blocks.append(''.join(block))
+
+    blocks = list(filter(None, blocks))
+    print(blocks)
+
+    return [mod_pow(int(x), e, key) for x in blocks]
+
+
+def decode(blocks, d, n):
+    codes = [str(mod_pow(int(x), d, n)) for x in blocks]
+    message = ''
+
+    for i, k in enumerate(codes):
+        if len(k) % 2 != 0:
+            codes[i] = '0' + k
+
+    print(codes)
+
+    for k in codes:
+        for a, b in grouped(k):
+            message += get_char_from_code(a + b)
+
+    return message
+
+
+def grouped(iterable, n=2):
+    return zip(*[iter(iterable)] * n)
+
+
+def get_char_from_code(char: str) -> str:
+
+    return chr(int(char) + 65)
+
+
+def get_char_code(char: str) -> str:
+    code = ord(char) - 65
+
+    if code < 10:
+        return '0' + str(code)
+
+    return str(code)
+
+
+def get_block_size(n: int) -> int:
+    print("Getting block size")
+    i = "25" * len(str(n))
+
+    while int(i) > n:
+        i = i[:-2]
+
+    return len(i.split('2')) - 1
 
 
 def generate_keys() -> (int, int):
