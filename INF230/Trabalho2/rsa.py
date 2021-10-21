@@ -1,5 +1,8 @@
 import itertools
 import random
+from typing import Iterable, Tuple, TypeVar
+
+T = TypeVar("T")
 
 MAX_INT = (2 ** 31) - 1
 
@@ -15,7 +18,7 @@ def main():
 
     d: int = get_d(e, phi)
 
-    message = 'TAYLORSWIFTRAINHADOPOP'
+    message: str = 'TAYLORSWIFTRAINHADOPOP'
 
     print("P: {}, Q: {}, E: {}, D: {}".format(p, q, e, d))
 
@@ -67,7 +70,7 @@ def encode(message: str, key: int, e: int) -> [str]:
     return [mod_pow(int(x), e, key) for x in blocks]
 
 
-def decode(blocks, d, n):
+def decode(blocks: [int], d: int, n: int) -> str:
     codes = [str(mod_pow(int(x), d, n)) for x in blocks]
     message = ''
 
@@ -84,7 +87,8 @@ def decode(blocks, d, n):
     return message
 
 
-def grouped(iterable, n=2):
+# https://stackoverflow.com/questions/5389507/iterating-over-every-two-elements-in-a-list
+def grouped(iterable: Iterable[T], n=2) -> Iterable[Tuple[T, ...]]:
     return zip(*[iter(iterable)] * n)
 
 
