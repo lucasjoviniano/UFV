@@ -1,0 +1,88 @@
+h1, h2, h3 {
+  font-family: 'Rokitt', serif;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+h2 {
+  font-size: 25px;
+  padding-left: 20px;
+}
+
+h3 {
+  margin-right: 10px;
+}
+
+span {
+  display: block;
+}
+
+button {
+  background: #336182;
+  border: 1px solid #7E7C7C;
+  box-sizing: border-box;
+  border-radius: 50px;
+  padding: 5px 20px 5px 20px;
+  color: white;
+  font-weight: bold;
+}
+
+input {
+  background-color: rgba(218, 217, 217, 0.73);
+  border: 1px solid #7E7C7C;
+  box-sizing: border-box;
+  border-radius: 50px;
+  height: 40px;
+}
+
+.header {
+  background-color: #336182;
+  min-height: 80px;
+  min-width: 100%;
+  margin: 0;
+  padding: 10px;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 52px;
+  margin: 10px 0 10px 0;
+  color: #FFF8F8;
+  box-shadow: black;
+}
+
+.informacoes-paciente {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 0 20px;
+}
+
+.informacoes-vacina {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 40px 0 40px 20px;
+}
+
+.adicionar-vacina {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 0 20px;
+}
+
+.info-vacina {
+  display: flex;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  padding: 50px 0 50px 0;
+  justify-content: center;
+}
+
+.b {
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 20px;
+}

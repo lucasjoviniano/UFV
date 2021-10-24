@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="./vacina.css" rel="stylesheet" />
+        <link href="normalise.css" rel="stylesheet"/>
+        <meta charset="UTF-8">
+		<title>Document</title>
+        <script>
+
+            function constructor() {
+                let paciente = {
+                    'nome': 'Luiz Inácio Lula da Silva',
+                    'sexo': 'Masculino',
+                    'idade': '18',
+                    'nome_vacina': 'Comirnaty',
+                    'lote': '19000056',
+                    'validade': '08/2022',
+                    'data': '13/12/2013',
+                    'dose': '2'
+                }
+
+                document.getElementById('nome').innerHTML += paciente.nome
+                document.getElementById('sexo').innerHTML += paciente.sexo
+                document.getElementById('idade').innerHTML += paciente.idade
+
+                document.getElementById('nome-vacina').innerHTML += paciente.nome_vacina
+                document.getElementById('lote').innerHTML += paciente.lote
+                document.getElementById('validade').innerHTML += paciente.validade
+                document.getElementById('data').innerHTML += paciente.data
+                document.getElementById('dose').innerHTML += paciente.dose
+            }
+
+            function adicionarVacina(){
+                let lista = document.getElementById("lista-vacinas")
+
+                let container = document.createElement("div")
+                container.classList.add("informacoes-vacina")
+
+                let infos1 = document.createElement("div")
+                let infos2 = document.createElement("div")
+                let infos3 = document.createElement("div")
+                let infos4 = document.createElement("div")
+
+                let nome = document.createElement("h3")
+                nome.innerHTML = "NOME: " + document.getElementById("nome_vacina_input").value
+
+                var lote = document.createElement("h3")
+                lote.innerHTML = "LOTE: " + document.getElementById("lote_vacina_input").value
+
+                var validade = document.createElement("h3")
+                validade.innerHTML = "VALIDADE: " + document.getElementById("validade_vacina_input").value
+                
+                var data = document.createElement("h3")
+                data.innerHTML = "DATA DE APLICACAO: " + document.getElementById("data_vacina_input").value
+
+                var dose = document.createElement("h3")
+                dose.innerHTML = "DOSE: " + document.getElementById("dose_vacina_input").value
+
+                infos1.appendChild(nome)
+
+                infos2.appendChild(lote)
+
+                infos3.appendChild(validade)
+                infos3.appendChild(dose)
+
+                infos4.appendChild(data)
+
+                container.appendChild(infos1)
+                container.appendChild(infos2)
+                container.appendChild(infos3)
+                container.appendChild(infos4)
+
+                lista.appendChild(container)
+
+                document.getElementById("input_vacina").reset()
+            }
+
+        </script>
+	</head>
+
+    <header>
+        <div class="header">
+            <h1 class="title">SM</h1>
+        </div>
+    </header>
+
+	<body onload="constructor()">
+
+    <h2>CARTÃO VACINAL: </h2>
+    <div class="informacoes-paciente">
+        <h3 id="nome">PACIENTE: </h3>
+        <span class="column">
+                <h3 id="sexo">SEXO: </h3>
+                <h3 id="idade">IDADE: </h3>
+        </span>
+    </div>
+
+    <div id="lista-vacinas">
+        <div class="informacoes-vacina">
+        <div>
+            <h3 id="nome-vacina">NOME: </h3>
+            <h3 id="data">DATA DE APLICAÇÃO: </h3>
+        </div>
+
+            <div>
+            <h3 id="lote">LOTE: </h3>
+        </div>
+
+            <div>
+            <h3 id="validade">VALIDADE: </h3>
+            <h3 id="dose">DOSE: </h3>
+        </div>
+        </div>
+    </div>
+
+    <h2>ADICIONAR VACINA :)</h2>
+    <form id="input_vacina">
+        <div class="adicionar-vacina">
+        <span>
+            <div class="info-vacina">
+                <h3>NOME: </h3>
+                <input id="nome_vacina_input" class="general-input" type="text">
+            </div>
+
+            <div class="info-vacina">
+                <h3>LOTE: </h3>
+                <input id="lote_vacina_input" class="general-input" type="text">
+            </div>
+        </span>
+
+            <span>
+            <div class="info-vacina">
+                <h3>VALIDADE: </h3>
+                <input id="validade_vacina_input" class="general-input" type="text">
+            </div>
+
+            <div class="info-vacina">
+                <h3>DOSE: </h3>
+                <input id="dose_vacina_input" class="general-input" type="text">
+            </div>
+
+        </span>
+
+            <span class="info-vacina">
+            <h3>DATA DE APLICAÇÃO: </h3>
+            <input id="data_vacina_input" class="general-input" type="text">
+        </span>
+        </div>
+    </form>
+
+    <div class="buttons">
+        <button class="b" onclick="adicionarVacina()">ATUALIZAR CARTÃO</button>
+        <button class="b">VOLTAR</button>
+    </div>
+	</body>
+</html>

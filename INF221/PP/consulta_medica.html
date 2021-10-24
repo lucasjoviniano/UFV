@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="consulta_medica.css">
+        <link rel="stylesheet" href="vacina.css">
+        <link rel="stylesheet" href="normalise.css">
+        <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <script>
+            function adicionaSintoma(){
+                let a = document.getElementById("sintomas")
+                let container = document.createElement('div')
+                let sintoma = document.createElement("input")
+                sintoma.setAttribute("type", "text")
+                container.classList.add('sintoma')
+
+                container.appendChild(sintoma)
+                a.appendChild(container)
+            }
+        </script>
+    </head>
+    <header>
+        <div class="header">
+            <h1 class="title">SM</h1>
+        </div>
+    </header>
+    <body>
+    <div class="informacoes-paciente">
+        <h3 id="nome">PACIENTE: </h3>
+        <span class="column">
+                <h3 id="sexo">SEXO: </h3>
+                <h3 id="idade">IDADE: </h3>
+        </span>
+    </div>
+
+    <h2>Histórico</h2>
+    <div class="historico">
+        <h3>Consulta</h3>
+        <span>
+            <h3>Sintomas: </h3>
+            <h3>Prescrição: </h3>
+        </span>
+
+        <h3>Data: </h3>
+    </div>
+
+    <div class="cartao-vacinal">
+
+    </div>
+
+    <div class="exames">
+
+    </div>
+
+    <div id="sintomas">
+        <div class="sintoma">
+            <input type="text">
+            <button onclick="adicionaSintoma()">+</button>
+        </div>
+    </div>
+
+    <div class="medicamentos">
+
+    </div>
+
+    <div class="poedido de exame">
+
+    </div>
+
+    <div class="anexar-exame>">
+
+    </div>
+
+
+    </body>
+</html>
