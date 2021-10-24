@@ -10,6 +10,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
+
+        function constructor() {
+            let paciente = {
+                'paciente': 'Luiz Inácio Lula da Silva',
+                'sexo': 'Masculino',
+                'idade': '18',
+
+                'data': '13/12/2013',
+                'sintomas': 'Dor de cabeça',
+                'prescricao': 'Repouso',
+
+                'vacina': 'Comirnaty',
+                'dose': '2',
+
+                'exame': 'raio-x_cranio.pdf'
+            }
+
+            document.getElementById('nome').innerHTML += paciente.paciente
+            document.getElementById('sexo').innerHTML += paciente.sexo
+            document.getElementById('idade').innerHTML += paciente.idade
+
+            document.getElementById('data').innerHTML += paciente.data
+            document.getElementById('sint').innerHTML += paciente.sintomas
+            document.getElementById('prescricao').innerHTML += paciente.prescricao
+
+            document.getElementById('nome-vacina').innerHTML += paciente.vacina
+            document.getElementById('dose').innerHTML += paciente.dose
+
+            document.getElementById('exame').innerHTML += paciente.exame
+        }
+
         function adicionaCampo(campo){
             let a = document.getElementById(campo)
             let container = document.createElement('div')
@@ -27,7 +58,7 @@
         <h1 class="title">SM</h1>
     </div>
 </header>
-<body>
+<body onload="constructor()">
 <div class="informacoes-paciente">
     <h3 id="nome">PACIENTE: </h3>
     <span class="column">
@@ -40,22 +71,22 @@
 <div id="historico">
     <h3>Consulta</h3>
     <span>
-        <h3>Sintomas: </h3>
-        <h3>Prescrição: </h3>
+        <h3 id="sint">Sintomas: </h3>
+        <h3 id="prescricao">Prescrição: </h3>
     </span>
 
-    <h3>Data: </h3>
+    <h3 id="data">Data: </h3>
 </div>
 
 <h2>Cartão Vacinal</h2>
 <div class="cartao-vacinal">
-    <h3>Vacina: </h3>
-    <h3>Dose: </h3>
+    <h3 id="nome-vacina">Vacina: </h3>
+    <h3 id="dose">Dose: </h3>
 </div>
 
 <h2>Exames</h2>
 <div id="exames">
-
+    <h3 id="exame"></h3>
 </div>
 
 <div class="t">
