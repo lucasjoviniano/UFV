@@ -1,3 +1,59 @@
+.t {
+    margin-left: 20px;
+}
+
 .sintoma {
     margin-top: 10px;
+}
+
+.medicamentos {
+    margin-left: 20px;
+}
+
+#sintomas {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#historico {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.cartao-vacinal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#medicamentos {
+    margin-left: 20px;
+}
+
+#pedido-de-exame {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#anexar-exame {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#prescricao {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+#labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#exames {
+    margin-top: 20px;
 }

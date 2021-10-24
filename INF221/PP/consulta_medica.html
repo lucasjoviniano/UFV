@@ -1,79 +1,120 @@
 <!DOCTYPE HTML>
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="consulta_medica.css">
-        <link rel="stylesheet" href="vacina.css">
-        <link rel="stylesheet" href="normalise.css">
-        <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<head>
+    <meta charset="utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="vacina.css">
+    <link rel="stylesheet" href="consulta_medica.css">
+    <link rel="stylesheet" href="normalise.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        <script>
-            function adicionaSintoma(){
-                let a = document.getElementById("sintomas")
-                let container = document.createElement('div')
-                let sintoma = document.createElement("input")
-                sintoma.setAttribute("type", "text")
-                container.classList.add('sintoma')
+    <script>
+        function adicionaCampo(campo){
+            let a = document.getElementById(campo)
+            let container = document.createElement('div')
+            let sintoma = document.createElement("input")
+            sintoma.setAttribute("type", "text")
+            container.classList.add('sintoma')
 
-                container.appendChild(sintoma)
-                a.appendChild(container)
-            }
-        </script>
-    </head>
-    <header>
-        <div class="header">
-            <h1 class="title">SM</h1>
-        </div>
-    </header>
-    <body>
-    <div class="informacoes-paciente">
-        <h3 id="nome">PACIENTE: </h3>
-        <span class="column">
+            container.appendChild(sintoma)
+            a.appendChild(container)
+        }
+    </script>
+</head>
+<header>
+    <div class="header">
+        <h1 class="title">SM</h1>
+    </div>
+</header>
+<body>
+<div class="informacoes-paciente">
+    <h3 id="nome">PACIENTE: </h3>
+    <span class="column">
                 <h3 id="sexo">SEXO: </h3>
                 <h3 id="idade">IDADE: </h3>
         </span>
+</div>
+
+<h2>Histórico</h2>
+<div id="historico">
+    <h3>Consulta</h3>
+    <span>
+        <h3>Sintomas: </h3>
+        <h3>Prescrição: </h3>
+    </span>
+
+    <h3>Data: </h3>
+</div>
+
+<h2>Cartão Vacinal</h2>
+<div class="cartao-vacinal">
+    <h3>Vacina: </h3>
+    <h3>Dose: </h3>
+</div>
+
+<h2>Exames</h2>
+<div id="exames">
+
+</div>
+
+<div class="t">
+    <h1>Consulta</h1>
+</div>
+
+<h2>Sintomas</h2>
+
+<div id="sintomas">
+    <div class="sintoma">
+        <input type="text">
+        <button onclick="adicionaCampo('sintomas')">+</button>
     </div>
+</div>
 
-    <h2>Histórico</h2>
-    <div class="historico">
-        <h3>Consulta</h3>
-        <span>
-            <h3>Sintomas: </h3>
-            <h3>Prescrição: </h3>
-        </span>
+<div class="t">
+    <h1>Prescrição</h1>
+</div>
 
-        <h3>Data: </h3>
-    </div>
+<div id="labels">
+    <h2>Medicamentos/Recomendações</h2>
+    <h2>Intervalo</h2>
+</div>
 
-    <div class="cartao-vacinal">
-
-    </div>
-
-    <div class="exames">
-
-    </div>
-
-    <div id="sintomas">
+<div id="prescricao">
+    <div id="medicamentos">
         <div class="sintoma">
             <input type="text">
-            <button onclick="adicionaSintoma()">+</button>
         </div>
     </div>
 
-    <div class="medicamentos">
-
+    <div id="intervalos">
+        <div class="sintoma">
+            <input type="text">
+            <button onclick="adicionaCampo('medicamentos'); adicionaCampo('intervalos')">+</button>
+        </div>
     </div>
+</div>
 
-    <div class="poedido de exame">
-
+<h2>Pedido de Exame</h2>
+<div id="pedido-de-exame">
+    <div class="sintoma">
+        <input type="text">
+        <button onclick="adicionaCampo('pedido-de-exame')">+</button>
     </div>
+</div>
 
-    <div class="anexar-exame>">
-
+<h2>Anexar Exames</h2>
+<div id="anexar-exame">
+    <div class="sintoma">
+        <input type="text">
+        <button onclick="adicionaCampo('anexar-exame')">+</button>
     </div>
+</div>
 
+<div class="buttons">
+    <button class="b">Concluir Consulta</button>
+    <button class="b">Cancelar Consulta</button>
+</div>
 
-    </body>
+</body>
 </html>
