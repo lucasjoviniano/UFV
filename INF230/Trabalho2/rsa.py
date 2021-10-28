@@ -6,6 +6,7 @@ from typing import Iterable, Tuple, TypeVar
 T = TypeVar("T")
 
 MAX_INT = (2 ** 31) - 1
+S_BIT = 2 ** 15
 
 
 def main():
@@ -21,7 +22,7 @@ def main():
 
         d: int = get_d(e, phi)
 
-        print("E: {}, D: {}, N: {}".format(e, d, n))
+        print("E: {}, D: {}, N: {}, P: {}, Q: {}".format(e, d, n, p, q))
 
     elif sys.argv[1] == 'codificar':
 
@@ -173,13 +174,13 @@ def generate_keys() -> (int, int):
     p, q = 0, 0
 
     while q == 0:
-        rng = random.randint(10000, MAX_INT)
+        rng = random.randint(20000, S_BIT)
 
         if fermat_primality_test(rng):
             q = rng
 
         while p == 0:
-            rng = random.randint(10000, MAX_INT)
+            rng = random.randint(20000, S_BIT)
 
             if fermat_primality_test(rng) and rng != q:
                 p = rng
