@@ -6,7 +6,7 @@ from typing import Iterable, Tuple, TypeVar
 T = TypeVar("T")
 
 MAX_INT = (2 ** 31) - 1
-S_BIT = 2 ** 15
+S_BIT = 55108
 
 
 def main():
@@ -33,11 +33,26 @@ def main():
         print(str(coded)[1:-1])
 
     elif sys.argv[1] == 'decodificar':
-        mensagem, n, d = "1634805184089914118, 437016238775307267, 2458304341065466193", 2752537950741231113, 492940772177008613
+        mensagem, n, d = "398084238 283256559 278323759 291208577 420819719 27568803 557167449 353363805", 636367279, 20786871
 
-        decoded = decode([x.strip() for x in mensagem.split(',')], int(d), int(n))
+        decoded = decode([x.strip() for x in mensagem.split(' ')], int(d), int(n))
 
         print(decoded)
+
+    elif sys.argv[1] == 'fatorar':
+        n, e = int(sys.argv[2]), int(sys.argv[3])
+
+        privada = find_private_key(n, e)
+
+        print(privada)
+
+    elif sys.argv[1] == 'verifica':
+        e, n, mensagem = int(sys.argv[3]), int(sys.argv[2]), sys.argv[4:]
+
+        m = check_sign(mensagem, e, n)
+
+        print(m)
+
 
 
     message: str = 'TAYLORSWIFTRAINHADOPOP'
@@ -259,6 +274,41 @@ def mod_pow(base: int, exponent: int, modulo: int) -> int:
         return mod_pow(number * number % modulo, exponent // 2, modulo)
     else:
         return number * mod_pow(number, exponent - 1, modulo) % modulo
+
+
+def find_private_key(n: int, e: int):
+
+    p, q = find_primes(n)
+
+    phi: int = (p - 1) * (q - 1)
+
+    return get_d(e, phi)
+
+
+def find_primes(n: int) -> (int, int):
+    p = crivo_de_erastotenes(S_BIT)
+
+    p.reverse()
+
+    for i in p:
+        for j in p:
+            # print("i: {}, j: {}".format(i, j))
+            if i * j == n:
+                return i, j
+
+
+def crivo_de_erastotenes(limit: int):
+    all_numbers = [True] * limit
+    all_numbers[0] = all_numbers[1] = False
+    primes = []
+
+    for i, is_prime in enumerate(all_numbers):
+        if is_prime:
+            primes.append(i)
+            for n in range(i * i, limit, i):
+                all_numbers[n] = False
+
+    return primes
 
 
 if __name__ == '__main__':
