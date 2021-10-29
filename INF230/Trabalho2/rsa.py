@@ -1,12 +1,17 @@
 import itertools
 import random
 import sys
+import re
 from typing import Iterable, Tuple, TypeVar
 
 T = TypeVar("T")
 
+# Valor máximo de um inteiro de 32 bits
 MAX_INT = (2 ** 31) - 1
-S_BIT = 55108
+
+# Valor máximo onde MAX_PRIME * MAX_PRIME < math.sqrt(9223372036854775807)
+# encontrado usando o arquivo maior_possivel.py
+MAX_PRIME = 55108
 
 
 def main():
@@ -26,11 +31,11 @@ def main():
 
     elif sys.argv[1] == 'codificar':
 
-        mensagem, n, e = sys.argv[2], int(sys.argv[3]), int(sys.argv[4])
+        mensagem, n, e = sys.argv[4:], int(sys.argv[2]), int(sys.argv[3])
 
         coded = encode(mensagem, n, e)
 
-        print(str(coded)[1:-1])
+        print(coded)
 
     elif sys.argv[1] == 'decodificar':
         mensagem, n, d = "398084238 283256559 278323759 291208577 420819719 27568803 557167449 353363805", 636367279, 20786871
@@ -49,31 +54,16 @@ def main():
     elif sys.argv[1] == 'verifica':
         e, n, mensagem = int(sys.argv[3]), int(sys.argv[2]), sys.argv[4:]
 
-        m = check_sign(mensagem, e, n)
+        m = decode(mensagem, e, n)
 
         print(m)
 
+    elif sys.argv[1] == 'assina':
+        n, d, mensagem = int(sys.argv[2]), int(sys.argv[3]), sys.argv[4:]
 
+        signed = encode(mensagem, n, d)
 
-    message: str = 'TAYLORSWIFTRAINHADOPOP'
-    #
-    #
-    #
-    # coded = encode(message, n, e)
-    #
-    # print("Mensagem Codificada: {}".format(coded))
-    #
-    # decoded = decode(coded, d, n)
-    #
-    # print("Mensagem Decodificada: {}".format(decoded))
-    #
-    # signed = sign(message, d, n)
-    #
-    # print("Mensagem Assinada: {}".format(signed))
-    #
-    # unsigned = check_sign(signed, e, n)
-    #
-    # print("Mensagem Conferida: {}".format(unsigned))
+        print(signed)
 
 
 def get_e(phi: int) -> int:
@@ -93,35 +83,18 @@ def get_d(e: int, phi: int) -> int:
     return s
 
 
-def sign(message, d, n):
-    block_size = get_block_size(n)
-
-    blocks = generate_message_blocks(message, block_size)
-
-    return [mod_pow(int(x), d, n) for x in blocks]
-
-
-def check_sign(message, e, n):
-    codes = [str(mod_pow(int(x), e, n)) for x in message]
-    message = ''
-
-    for i, k in enumerate(codes):
-        if len(k) % 2 != 0:
-            codes[i] = '0' + k
-
-    for k in codes:
-        for a, b in grouped(k):
-            message += get_char_from_code(a + b)
-
-    return message
-
-
-def encode(message: str, key: int, e: int) -> [str]:
+def encode(message: [str], key: int, e: int) -> [str]:
     block_size = get_block_size(key)
 
-    blocks = generate_message_blocks(message, block_size)
+    only_letters = re.compile("[A-Z]+")
 
-    return [mod_pow(int(x), e, key) for x in blocks]
+    if only_letters.fullmatch(''.join(message)) is not None:
+        blocks = generate_message_blocks(''.join(message), block_size)
+    else:
+        blocks = message
+
+    blocos = [mod_pow(int(x), e, key) for x in blocks]
+    return ' '.join(map(lambda x: str(x), blocos))
 
 
 def generate_message_blocks(message, block_size):
@@ -189,13 +162,13 @@ def generate_keys() -> (int, int):
     p, q = 0, 0
 
     while q == 0:
-        rng = random.randint(20000, S_BIT)
+        rng = random.randint(20000, MAX_PRIME)
 
         if fermat_primality_test(rng):
             q = rng
 
         while p == 0:
-            rng = random.randint(20000, S_BIT)
+            rng = random.randint(20000, MAX_PRIME)
 
             if fermat_primality_test(rng) and rng != q:
                 p = rng
@@ -286,19 +259,20 @@ def find_private_key(n: int, e: int):
 
 
 def find_primes(n: int) -> (int, int):
-    p = crivo_de_erastotenes(S_BIT)
+    p = crivo_de_erastotenes(MAX_PRIME)
 
+    # Começa de cima pois tem mais chances dos primos serem maiores
     p.reverse()
 
     for i in p:
         for j in p:
-            # print("i: {}, j: {}".format(i, j))
             if i * j == n:
                 return i, j
 
 
-def crivo_de_erastotenes(limit: int):
+def crivo_de_erastotenes(limit: int) -> [int]:
     all_numbers = [True] * limit
+    # 0 e 1 não são primos
     all_numbers[0] = all_numbers[1] = False
     primes = []
 
