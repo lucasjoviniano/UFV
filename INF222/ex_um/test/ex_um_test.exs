@@ -22,6 +22,26 @@ defmodule ExUmTest do
   end
 
   test "moda atrizes" do
-    assert ExUm.moda(atrizes) == 35
+    assert ExUm.moda(atrizes) == [35]
+  end
+
+  test "ponto medio atrizes" do
+    assert ExUm.ponto_medio(atrizes) == 48.5
+  end
+
+  test "amplitude atrizes" do
+    assert ExUm.amplitude(atrizes) == 63
+  end
+
+  test "desvio padrao atrizes" do
+    assert ExUm.desvio_padrao(atrizes) == 11.36
+  end
+
+  test "variancia atrizes" do
+    assert ExUm.variancia(atrizes) == 129.10
+  end
+
+  test "coeficiente atrizes" do
+    assert ExUm.coeficiente_de_variacao(atrizes) == 32.09
   end
 end
