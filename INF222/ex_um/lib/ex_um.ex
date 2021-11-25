@@ -17,7 +17,7 @@ defmodule ExUm do
     sorted = Enum.sort(numbers)
     size = length(sorted)
     if Integer.is_odd(size) do
-      sorted[size / 2]
+      sorted[trunc(size / 2)]
     else
       media([Enum.at(sorted, trunc(size / 2 - 1)), Enum.at(sorted, trunc(size / 2))])
     end
