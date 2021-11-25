@@ -2,15 +2,12 @@ defmodule ExUm do
   require Integer
   require Decimal
 
+  def media([]), do: 0
   def media(numbers) do
-    if length(numbers) == 0 do
-      0
-    else
-      Enum.sum(numbers) / length(numbers)
-      |> Decimal.from_float()
-      |> Decimal.round(1)
-      |> Decimal.to_float()
-    end
+    Enum.sum(numbers) / length(numbers)
+    |> Decimal.from_float()
+    |> Decimal.round(1)
+    |> Decimal.to_float()
   end
 
   def mediana(numbers) do
@@ -47,9 +44,8 @@ defmodule ExUm do
     |> Decimal.to_float()
   end
 
-  def amplitude(numbers) do
-    Enum.max(numbers) - Enum.min(numbers)
-  end
+  @spec amplitude(list) :: number
+  def amplitude(numbers), do: Enum.max(numbers) - Enum.min(numbers)
 
   @spec desvio_padrao(list) :: number
   def desvio_padrao(numbers) do
@@ -61,11 +57,10 @@ defmodule ExUm do
 
   def variancia(numbers) do
     m = media(numbers)
-    sum = numbers
+    numbers
     |> Enum.map(&(:math.pow(&1 - m, 2)))
     |> Enum.sum()
-
-    (sum / (length(numbers) - 1))
+    |> Kernel./(length(numbers) - 1)
     |> Decimal.from_float()
     |> Decimal.round(2)
     |> Decimal.to_float()
