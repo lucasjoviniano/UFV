@@ -1,0 +1,12 @@
+[
+  {
+    "arguments": [
+      "/usr/sbin/g++",
+      "-c",
+      "--std=c++11",
+      "A.cpp"
+    ],
+    "directory": "/home/lucasjoviniano/dev/UFV/INF333/lista-0",
+    "file": "/home/lucasjoviniano/dev/UFV/INF333/lista-0/A.cpp"
+  }
+]
