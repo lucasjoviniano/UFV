@@ -1,10 +1,6 @@
 defmodule ListaUm do
   require Integer
 
-  @moduledoc """
-  Documentation for `ListaUm`.
-  """
-
   @spec media(list) :: float
   def media(values) when is_tuple(values) do
     media(Tuple.to_list(values))
