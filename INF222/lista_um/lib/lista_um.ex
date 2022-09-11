@@ -29,7 +29,7 @@ defmodule ListaUm do
     ])
   end
 
-  @spec moda(any) :: list
+  @spec moda(any) :: list(Integer)
   def moda(values) do
     frequencies =
       values
@@ -50,12 +50,12 @@ defmodule ListaUm do
     |> media()
   end
 
-  def amplitude(values) do
+  def amplitude(values, class_size \\ 1) do
     range =
       values
       |> Enum.min_max()
 
-    elem(range, 1) - elem(range, 0)
+    (elem(range, 1) - elem(range, 0)) / class_size
   end
 
   def variancia(values) do
