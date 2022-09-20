@@ -1,0 +1,84 @@
+<!-- livebook:{"persist_outputs":true} -->
+
+# Lista 2
+
+```elixir
+Mix.install([
+  {:kino, "~> 0.6.2"},
+  {:kino_vega_lite, "~> 0.1.3"}
+])
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:ok
+```
+
+## Questão 1
+
+```elixir
+atores = [
+  %{bin_start: 20, bin_end: 30, count: 1},
+  %{bin_start: 30, bin_end: 40, count: 25},
+  %{bin_start: 40, bin_end: 50, count: 30},
+  %{bin_start: 50, bin_end: 60, count: 14},
+  %{bin_start: 60, bin_end: 70, count: 3},
+  %{bin_start: 70, bin_end: 80, count: 1},
+  %{bin_start: 80, bin_end: 90, count: 0}
+]
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+[
+  %{bin_end: 30, bin_start: 20, count: 1},
+  %{bin_end: 40, bin_start: 30, count: 25},
+  %{bin_end: 50, bin_start: 40, count: 30},
+  %{bin_end: 60, bin_start: 50, count: 14},
+  %{bin_end: 70, bin_start: 60, count: 3},
+  %{bin_end: 80, bin_start: 70, count: 1},
+  %{bin_end: 90, bin_start: 80, count: 0}
+]
+```
+
+```elixir
+VegaLite.new(width: 500, height: 400, title: "Idades dos Atores")
+|> VegaLite.data_from_values(atores)
+|> VegaLite.mark(:bar)
+|> VegaLite.encode_field(:x, "bin_start", bin: %{binned: true, step: 10}, title: "Atores")
+|> VegaLite.encode_field(:x2, "bin_end")
+|> VegaLite.encode_field(:y, "count", type: :quantitative, title: "Quantidade")
+```
+
+<!-- livebook:{"output":true} -->
+
+```vega-lite
+{"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"values":[{"bin_end":30,"bin_start":20,"count":1},{"bin_end":40,"bin_start":30,"count":25},{"bin_end":50,"bin_start":40,"count":30},{"bin_end":60,"bin_start":50,"count":14},{"bin_end":70,"bin_start":60,"count":3},{"bin_end":80,"bin_start":70,"count":1},{"bin_end":90,"bin_start":80,"count":0}]},"encoding":{"x":{"bin":{"binned":true,"step":10},"field":"bin_start","title":"Atores"},"x2":{"field":"bin_end"},"y":{"field":"count","title":"Quantidade","type":"quantitative"}},"height":400,"mark":"bar","title":"Idades dos Atores","width":500}
+```
+
+```elixir
+atrizes = [
+  %{bin_start: 20, bin_end: 30, count: 28},
+  %{bin_start: 30, bin_end: 40, count: 30},
+  %{bin_start: 40, bin_end: 50, count: 12},
+  %{bin_start: 50, bin_end: 60, count: 2},
+  %{bin_start: 60, bin_end: 70, count: 2},
+  %{bin_start: 70, bin_end: 80, count: 1},
+  %{bin_start: 80, bin_end: 90, count: 1}
+]
+
+VegaLite.new(width: 500, height: 400, title: "Idades das Atrizes")
+|> VegaLite.data_from_values(atrizes)
+|> VegaLite.mark(:bar)
+|> VegaLite.encode_field(:x, "bin_start", bin: %{binned: true, step: 10}, title: "Atrizes")
+|> VegaLite.encode_field(:x2, "bin_end")
+|> VegaLite.encode_field(:y, "count", type: :quantitative, title: "Quantidade")
+```
+
+<!-- livebook:{"output":true} -->
+
+```vega-lite
+{"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"values":[{"bin_end":30,"bin_start":20,"count":28},{"bin_end":40,"bin_start":30,"count":30},{"bin_end":50,"bin_start":40,"count":12},{"bin_end":60,"bin_start":50,"count":2},{"bin_end":70,"bin_start":60,"count":2},{"bin_end":80,"bin_start":70,"count":1},{"bin_end":90,"bin_start":80,"count":1}]},"encoding":{"x":{"bin":{"binned":true,"step":10},"field":"bin_start","title":"Atrizes"},"x2":{"field":"bin_end"},"y":{"field":"count","title":"Quantidade","type":"quantitative"}},"height":400,"mark":"bar","title":"Idades das Atrizes","width":500}
+```

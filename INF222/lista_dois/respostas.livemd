@@ -1,0 +1,249 @@
+<!-- livebook:{"persist_outputs":true} -->
+
+# Lista 2
+
+```elixir
+Mix.install([
+  {:kino, "~> 0.6.2"},
+  {:kino_vega_lite, "~> 0.1.3"},
+  {:explorer, "~> 0.3.1"}
+])
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+:ok
+```
+
+## Questão 1
+
+Os gráficos abaixo corroboram as afirmações feitas no Exercício 1.
+
+```elixir
+atores = [
+  %{bin_start: 20, bin_end: 30, count: 1},
+  %{bin_start: 30, bin_end: 40, count: 25},
+  %{bin_start: 40, bin_end: 50, count: 30},
+  %{bin_start: 50, bin_end: 60, count: 14},
+  %{bin_start: 60, bin_end: 70, count: 3},
+  %{bin_start: 70, bin_end: 80, count: 1},
+  %{bin_start: 80, bin_end: 90, count: 0}
+]
+
+VegaLite.new(width: 400, height: 400, title: "Histograma de Atores")
+|> VegaLite.data_from_values(atores)
+|> VegaLite.mark(:bar)
+|> VegaLite.encode_field(:x, "bin_start", bin: %{binned: true, step: 10}, title: "Atores")
+|> VegaLite.encode_field(:x2, "bin_end")
+|> VegaLite.encode_field(:y, "count", type: :quantitative, title: "Quantidade")
+```
+
+<!-- livebook:{"output":true} -->
+
+```vega-lite
+{"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"values":[{"bin_end":30,"bin_start":20,"count":1},{"bin_end":40,"bin_start":30,"count":25},{"bin_end":50,"bin_start":40,"count":30},{"bin_end":60,"bin_start":50,"count":14},{"bin_end":70,"bin_start":60,"count":3},{"bin_end":80,"bin_start":70,"count":1},{"bin_end":90,"bin_start":80,"count":0}]},"encoding":{"x":{"bin":{"binned":true,"step":10},"field":"bin_start","title":"Atores"},"x2":{"field":"bin_end"},"y":{"field":"count","title":"Quantidade","type":"quantitative"}},"height":400,"mark":"bar","title":"Histograma de Atores","width":400}
+```
+
+```elixir
+atrizes = [
+  %{bin_start: 20, bin_end: 30, count: 28},
+  %{bin_start: 30, bin_end: 40, count: 30},
+  %{bin_start: 40, bin_end: 50, count: 12},
+  %{bin_start: 50, bin_end: 60, count: 2},
+  %{bin_start: 60, bin_end: 70, count: 2},
+  %{bin_start: 70, bin_end: 80, count: 1},
+  %{bin_start: 80, bin_end: 90, count: 1}
+]
+
+VegaLite.new(width: 400, height: 400, title: "Histograma de Atrizes")
+|> VegaLite.data_from_values(atrizes)
+|> VegaLite.mark(:bar)
+|> VegaLite.encode_field(:x, "bin_start", bin: %{binned: true, step: 10}, title: "Atrizes")
+|> VegaLite.encode_field(:x2, "bin_end")
+|> VegaLite.encode_field(:y, "count", type: :quantitative, title: "Quantidade")
+```
+
+<!-- livebook:{"output":true} -->
+
+```vega-lite
+{"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"values":[{"bin_end":30,"bin_start":20,"count":28},{"bin_end":40,"bin_start":30,"count":30},{"bin_end":50,"bin_start":40,"count":12},{"bin_end":60,"bin_start":50,"count":2},{"bin_end":70,"bin_start":60,"count":2},{"bin_end":80,"bin_start":70,"count":1},{"bin_end":90,"bin_start":80,"count":1}]},"encoding":{"x":{"bin":{"binned":true,"step":10},"field":"bin_start","title":"Atrizes"},"x2":{"field":"bin_end"},"y":{"field":"count","title":"Quantidade","type":"quantitative"}},"height":400,"mark":"bar","title":"Histograma de Atrizes","width":400}
+```
+
+## Questão 2
+
+Levando em consideração a hipótese "pessas acima de 70 anos não possuem uma quantidade extremamente reduzida de prêmios". Podemos usar o seguinte gráfico para a prova.
+
+```elixir
+academy_awards = [
+  %{category: "<= 70", value: 147},
+  %{category: "> 70", value: 5}
+]
+
+VegaLite.new(width: 400, height: 400)
+|> VegaLite.data_from_values(academy_awards)
+|> VegaLite.mark(:arc)
+|> VegaLite.encode_field(:theta, "value", type: :quantitative)
+|> VegaLite.encode_field(:color, "category", type: :nominal)
+```
+
+<!-- livebook:{"output":true} -->
+
+```vega-lite
+{"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"values":[{"category":"<= 70","value":147},{"category":"> 70","value":5}]},"encoding":{"color":{"field":"category","type":"nominal"},"theta":{"field":"value","type":"quantitative"}},"height":400,"mark":"arc","width":400}
+```
+
+## Questão 3
+
+```elixir
+store_data = Explorer.DataFrame.from_csv!("store.csv")
+Explorer.DataFrame.mutate_with(store_data, &[Renda: Explorer.Series.cast(&1["Renda"], :float)])
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Explorer.DataFrame<
+  Polars[40 x 5]
+  Idade integer [55, 31, 29, 52, 25, ...]
+  Renda float [16.8, 11.4, 18.1, 16.1, 14.6, ...]
+  Compras integer [20, 24, 48, 51, 42, ...]
+  Cartões integer [4, 4, 3, 5, 3, ...]
+  Sexo string ["Feminino", "Feminino", "Feminino", "Feminino", "Feminino", ...]
+>
+```
+
+```elixir
+gender = Explorer.Series.count(store_data["Sexo"]) |> Explorer.DataFrame.to_columns()
+
+VegaLite.new(width: 400, height: 400, title: "Sexo dos Clientes")
+|> VegaLite.data_from_values(gender)
+|> VegaLite.mark(:arc)
+|> VegaLite.encode_field(:theta, "counts", type: :quantitative)
+|> VegaLite.encode_field(:color, "values", type: :nominal)
+```
+
+<!-- livebook:{"output":true} -->
+
+```vega-lite
+{"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"values":[{"counts":30,"values":"Feminino"},{"counts":10,"values":"Masculino"}]},"encoding":{"color":{"field":"values","type":"nominal"},"theta":{"field":"counts","type":"quantitative"}},"height":400,"mark":"arc","title":"Sexo dos Clientes","width":400}
+```
+
+```elixir
+Explorer.Series.count(store_data["Sexo"])
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+#Explorer.DataFrame<
+  Polars[2 x 2]
+  values string ["Feminino", "Masculino"]
+  counts integer [30, 10]
+>
+```
+
+```elixir
+age = %{ages: Explorer.DataFrame.pull(store_data, "Idade") |> Explorer.Series.to_list()}
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+%{
+  ages: [55, 31, 29, 52, 25, 28, 30, 29, 47, 35, 27, 35, 54, 28, 63, 25, 35, 78, 67, 43, 73, 50, 22,
+   25, 31, 36, 55, 35, 32, 50, 39, 75, 48, 25, 49, 38, 53, 37, 56, 43]
+}
+```
+
+```elixir
+VegaLite.new(width: 400, height: 400, title: "Histograma de Idades")
+|> VegaLite.data_from_values(age)
+|> VegaLite.mark(:bar)
+|> VegaLite.encode_field(:x, "ages", bin: true, title: "Idades")
+|> VegaLite.encode(:y, aggregate: :count, type: :quantitative, title: "Quantidade")
+```
+
+<!-- livebook:{"output":true} -->
+
+```vega-lite
+{"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"values":[{"ages":55},{"ages":31},{"ages":29},{"ages":52},{"ages":25},{"ages":28},{"ages":30},{"ages":29},{"ages":47},{"ages":35},{"ages":27},{"ages":35},{"ages":54},{"ages":28},{"ages":63},{"ages":25},{"ages":35},{"ages":78},{"ages":67},{"ages":43},{"ages":73},{"ages":50},{"ages":22},{"ages":25},{"ages":31},{"ages":36},{"ages":55},{"ages":35},{"ages":32},{"ages":50},{"ages":39},{"ages":75},{"ages":48},{"ages":25},{"ages":49},{"ages":38},{"ages":53},{"ages":37},{"ages":56},{"ages":43}]},"encoding":{"x":{"bin":true,"field":"ages","title":"Idades"},"y":{"aggregate":"count","title":"Quantidade","type":"quantitative"}},"height":400,"mark":"bar","title":"Histograma de Idades","width":400}
+```
+
+```elixir
+income =
+  Explorer.DataFrame.pull(store_data, "Renda")
+  |> Explorer.Series.count()
+  |> Explorer.DataFrame.to_columns()
+
+inc = for _x <- 0..length(income["counts"]), do: :rand.uniform()
+income = Map.put(income, "counts", inc)
+income
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+%{
+  "counts" => [0.6233184553600342, 0.40687555062077707, 0.5687532539870175, 0.3421839380087407,
+   0.3134768339985089, 0.8717239456460595, 0.6712272203677638, 0.8384828874291115,
+   0.3473703834925518, 0.11235745789872398, 0.34997265128941824, 0.3700995272874156,
+   0.6199603316285198, 0.6623161243808179, 0.21299463045176859, 0.6401518684502324,
+   0.5307440462528212, 0.9886270269276365, 0.8015952195119607, 0.6846558569974869,
+   0.2279678441788684, 0.0021865598629335903, 0.6553571982849815, 0.7548457384584502,
+   0.1715677021684594, 0.1686399957658441, 0.9776825492404018, 0.6768951576559866, 0.09268308578521,
+   0.022504892449848546, 0.7873914094312663, 0.5108359586568111, 0.9436774400735285,
+   0.9162140514670366, 0.7362045311245534, 0.7040952059629704, 0.15308239333316542],
+  "values" => [28.1, 19.0, 29.1, 32.1, 16.8, 11.4, 18.1, 16.1, 14.6, 18.4, 32.5, 21.2, 33.1, 24.0,
+   25.5, 29.2, 10.1, 12.5, 11.1, 29.3, 23.1, 10.0, 13.8, 25.8, 19.2, 54.8, 22.6, 30.1, 23.9, 27.1,
+   15.2, 24.2, 18.0, 25.4, 15.1, 26.1]
+}
+```
+
+```elixir
+VegaLite.new(width: 600, height: 600, title: "Renda")
+|> VegaLite.data_from_values(income)
+|> VegaLite.mark(:point)
+|> VegaLite.encode_field(:x, "counts", type: :quantitative)
+|> VegaLite.encode_field(:y, "values", type: :quantitative, title: "Renda")
+```
+
+<!-- livebook:{"output":true} -->
+
+```vega-lite
+{"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"values":[{"counts":0.6233184553600342,"values":28.1},{"counts":0.40687555062077707,"values":19.0},{"counts":0.5687532539870175,"values":29.1},{"counts":0.3421839380087407,"values":32.1},{"counts":0.3134768339985089,"values":16.8},{"counts":0.8717239456460595,"values":11.4},{"counts":0.6712272203677638,"values":18.1},{"counts":0.8384828874291115,"values":16.1},{"counts":0.3473703834925518,"values":14.6},{"counts":0.11235745789872398,"values":18.4},{"counts":0.34997265128941824,"values":32.5},{"counts":0.3700995272874156,"values":21.2},{"counts":0.6199603316285198,"values":33.1},{"counts":0.6623161243808179,"values":24.0},{"counts":0.21299463045176859,"values":25.5},{"counts":0.6401518684502324,"values":29.2},{"counts":0.5307440462528212,"values":10.1},{"counts":0.9886270269276365,"values":12.5},{"counts":0.8015952195119607,"values":11.1},{"counts":0.6846558569974869,"values":29.3},{"counts":0.2279678441788684,"values":23.1},{"counts":0.0021865598629335903,"values":10.0},{"counts":0.6553571982849815,"values":13.8},{"counts":0.7548457384584502,"values":25.8},{"counts":0.1715677021684594,"values":19.2},{"counts":0.1686399957658441,"values":54.8},{"counts":0.9776825492404018,"values":22.6},{"counts":0.6768951576559866,"values":30.1},{"counts":0.09268308578521,"values":23.9},{"counts":0.022504892449848546,"values":27.1},{"counts":0.7873914094312663,"values":15.2},{"counts":0.5108359586568111,"values":24.2},{"counts":0.9436774400735285,"values":18.0},{"counts":0.9162140514670366,"values":25.4},{"counts":0.7362045311245534,"values":15.1},{"counts":0.7040952059629704,"values":26.1}]},"encoding":{"x":{"field":"counts","type":"quantitative"},"y":{"field":"values","title":"Renda","type":"quantitative"}},"height":600,"mark":"point","title":"Renda","width":600}
+```
+
+```elixir
+cards_per_gender =
+  store_data
+  |> Explorer.DataFrame.group_by("Sexo")
+  |> Explorer.DataFrame.summarise(Cartões: [:sum])
+  |> Explorer.DataFrame.to_columns()
+```
+
+<!-- livebook:{"output":true} -->
+
+```
+%{"Cartões_sum" => [104, 31], "Sexo" => ["Feminino", "Masculino"]}
+```
+
+```elixir
+VegaLite.new(width: 500, height: 500)
+|> VegaLite.data_from_values(cards_per_gender)
+|> VegaLite.layers([
+  VegaLite.new()
+  |> VegaLite.mark(:text, radius: 180, font_size: 16)
+  |> VegaLite.encode_field(:text, "Cartões_sum", type: :quantitative),
+  VegaLite.new()
+  |> VegaLite.mark(:arc, radius: 160)
+])
+|> VegaLite.encode_field(:theta, "Cartões_sum", type: :quantitative, stack: true)
+|> VegaLite.encode_field(:color, "Sexo", type: :nominal, title: "Cartões por Sexo")
+```
+
+<!-- livebook:{"output":true} -->
+
+```vega-lite
+{"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"values":[{"Cartões_sum":104,"Sexo":"Feminino"},{"Cartões_sum":31,"Sexo":"Masculino"}]},"encoding":{"color":{"field":"Sexo","title":"Cartões por Sexo","type":"nominal"},"theta":{"field":"Cartões_sum","stack":true,"type":"quantitative"}},"height":500,"layer":[{"encoding":{"text":{"field":"Cartões_sum","type":"quantitative"}},"mark":{"fontSize":16,"radius":180,"type":"text"}},{"mark":{"radius":160,"type":"arc"}}],"width":500}
+```
