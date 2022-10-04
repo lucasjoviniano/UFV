@@ -1,30 +1,39 @@
-#include <cstring>
 #include <iomanip>
 #include <iostream>
 #include <map>
+#include <string>
 using namespace std;
 
 int main() {
-  int t;
-  cin >> t;
-
+  int n;
+  map<string, int> m;
+  string name;
+  cin >> n;
+  cin.ignore();
   cin.ignore();
 
-  while (t--) {
-    map<string, int> m;
-    string tree;
-    int n = 0;
-    while (getline(cin, tree)) {
-      if (tree.compare("") == 0)
+  while (n--) {
+    int total = 0;
+
+    while (getline(cin, name)) {
+      if (name.empty())
         break;
-      m[tree]++;
-      n++;
+
+      m[name]++;
+
+      total++;
     }
-    for (auto i = m.begin(); i != m.end(); i++)
-      cout << i->first << " " << fixed << setprecision(4)
-           << i->second * 100.0 / n << endl;
-    if (t)
-      cout << "\n";
+
+    for (auto it = m.begin(); it != m.end(); it++) {
+      cout << it->first << " " << fixed << setprecision(4)
+           << ((double)(*it).second / (double)total * 100.0) << endl;
+    }
+
+    if (n > 0) {
+      cout << endl;
+      m.clear();
+    }
   }
+
   return 0;
 }
