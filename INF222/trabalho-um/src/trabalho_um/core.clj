@@ -11,9 +11,9 @@
   (let [probs (partition 2 (get-probabilities amount))]
     (loop [p probs]
       (cond
-      (<= (ffirst p) player-one) :player-one
-      (<= (second (first p)) player-two) :player-two
-    :else (recur (rest p))))))
+        (<= (ffirst p) player-one) :player-one
+        (<= (second (first p)) player-two) :player-two
+        :else (recur (rest p))))))
 
 (defn duel [amount player-one player-two]
   (frequencies (repeatedly amount (fn [] (duel-battle amount player-one player-two)))))
