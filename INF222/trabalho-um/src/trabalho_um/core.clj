@@ -1,7 +1,8 @@
 (ns trabalho-um.core
   (:gen-class))
 
-(defn get-probabilities "Gera uma quantidade definina por amount de tentativas"
+(defn get-probabilities
+  "Gera uma quantidade definina por amount de tentativas"
   [amount]
   (repeatedly amount rand))
 
