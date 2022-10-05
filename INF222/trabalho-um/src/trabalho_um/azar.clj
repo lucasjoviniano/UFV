@@ -1,19 +1,16 @@
 (ns trabalho-um.azar (:gen-class))
 
-; Quantas vezes altera o jogador que está na frente
-; Ficou na frente o jogo todo?
-; Em quantos lançamentos ele ficou na frente
-
 (defn toss-coin "Joga moeda" [] (rand-nth '(::head ::tail)))
-(defn check-swap [v ans] (if (= (get ans :v1) (get ans :v2)) (inc v) v))
+
+(defn check-swap [v ans] (if (= (ans :v1) (ans :v2)) (inc v) v))
 
 (defn azar
   [first-amount second-amount]
   (loop [ans {:v1 first-amount :v2 second-amount :winner "" :rounds 1 :one-swaps 0 :two-swaps 0}]
     (let [coin (toss-coin)]
       (cond
-        (zero? (get ans :v1)) (assoc ans :winner "segundo")
-        (zero? (get ans :v2)) (assoc ans :winner "primeiro")
+        (zero? (get ans :v1)) (-> ans (dissoc :v1) (dissoc :v2) (assoc :winner "segundo"))
+        (zero? (get ans :v2)) (-> ans (dissoc :v1) (dissoc :v2) (assoc :winner "primeiro"))
         :else (case coin
                 ::head (recur (-> ans
                                   (update :two-swaps check-swap ans)
@@ -21,7 +18,6 @@
                                   (update :v2 inc)
                                   (update :rounds inc)))
                 ::tail (recur (-> ans
-                                  ; Quem está na frente só altera se os valores forem iguais
                                   (update :one-swaps check-swap ans)
                                   (update :v1 inc)
                                   (update :v2 dec)
