@@ -16,6 +16,7 @@
       (assoc :winner winner)))
 
 (defn azar
+  "Define ganhador do jogo. Recebe a quantidade de dinheiro de cada."
   [first-amount second-amount]
   (loop [ans {:v1 first-amount
               :v2 second-amount
