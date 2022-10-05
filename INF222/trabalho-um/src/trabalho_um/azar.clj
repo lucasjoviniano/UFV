@@ -6,7 +6,12 @@
 
 (defn azar
   [first-amount second-amount]
-  (loop [ans {:v1 first-amount :v2 second-amount :winner "" :rounds 1 :one-swaps 0 :two-swaps 0}]
+  (loop [ans {:v1 first-amount
+              :v2 second-amount
+              :winner ""
+              :rounds 1
+              :one-swaps 0
+              :two-swaps 0}]
     (let [coin (toss-coin)]
       (cond
         (zero? (ans :v1)) (-> ans (dissoc :v1) (dissoc :v2) (assoc :winner "segundo"))
