@@ -5,6 +5,7 @@
 ; Em quantos lançamentos ele ficou na frente
 
 (defn toss-coin "Joga moeda" [] (rand-nth '(::head ::tail)))
+(defn check-swap [v ans] (if (= (get ans :v1) (get ans :v2)) (inc v) v))
 
 (defn azar
   [first-amount second-amount]
@@ -15,13 +16,13 @@
         (zero? (get ans :v2)) (assoc ans :winner "primeiro")
         :else (case coin
                 ::head (recur (-> ans
-                                  (update :two-swaps #(if (= (get ans :v1) (get ans :v2)) (inc %) %))
+                                  (update :two-swaps check-swap ans)
                                   (update :v1 dec)
                                   (update :v2 inc)
                                   (update :rounds inc)))
                 ::tail (recur (-> ans
                                   ; Quem está na frente só altera se os valores forem iguais
-                                  (update :one-swaps #(if (= (get ans :v1) (get ans :v2)) (inc %) %))
+                                  (update :one-swaps check-swap ans)
                                   (update :v1 inc)
                                   (update :v2 dec)
                                   (update :rounds inc))))))))
