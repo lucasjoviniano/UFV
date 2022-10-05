@@ -4,16 +4,23 @@
 ; Ficou na frente o jogo todo?
 ; Em quantos lançamentos ele ficou na frente
 
-(defn toss-coin "Joga moeda" [] (rand-nth '(:cara :coroa)))
+(defn toss-coin "Joga moeda" [] (rand-nth '(::head ::tail)))
 
 (defn azar
   [first-amount second-amount]
-  (loop [v1 first-amount v2 second-amount rounds 1]
+  (loop [ans {:v1 first-amount :v2 second-amount :winner :primeiro :rounds 1 :one-swaps 0 :two-swaps 0}]
     (let [coin (toss-coin)]
-      (if (zero? v1) 
-        [:segundo rounds]
-        (if (zero? v2)
-          [:primeiro rounds]
-        (if (= coin :cara)
-          (recur (dec v1) (inc v2) (inc rounds))
-          (recur (inc v1) (dec v2) (inc rounds))))))))
+      (cond
+        (zero? (get ans :v1)) (assoc ans :winner :segundo)
+        (zero? (get ans :v2)) (assoc ans :winner :primeiro)
+        :else (case coin
+                ::head (recur (-> ans
+                                  (update :two-swaps #(if (= (get ans :v1) (get ans :v2)) (inc %) %))
+                                  (update :v1 dec)
+                                  (update :v2 inc)
+                                  (update :rounds inc)))
+                ::tail (recur (-> ans
+                                  (update :one-swaps #(if (= (get ans :v1) (get ans :v2)) (inc %) %))
+                                  (update :v1 inc)
+                                  (update :v2 dec)
+                                  (update :rounds inc))))))))
