@@ -9,8 +9,8 @@
   (loop [ans {:v1 first-amount :v2 second-amount :winner "" :rounds 1 :one-swaps 0 :two-swaps 0}]
     (let [coin (toss-coin)]
       (cond
-        (zero? (get ans :v1)) (-> ans (dissoc :v1) (dissoc :v2) (assoc :winner "segundo"))
-        (zero? (get ans :v2)) (-> ans (dissoc :v1) (dissoc :v2) (assoc :winner "primeiro"))
+        (zero? (ans :v1)) (-> ans (dissoc :v1) (dissoc :v2) (assoc :winner "segundo"))
+        (zero? (ans :v2)) (-> ans (dissoc :v1) (dissoc :v2) (assoc :winner "primeiro"))
         :else (case coin
                 ::head (recur (-> ans
                                   (update :two-swaps check-swap ans)
