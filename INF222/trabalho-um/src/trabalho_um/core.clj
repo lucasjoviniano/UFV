@@ -30,8 +30,8 @@
     "duelo" (let [[amount f-n f-d s-n s-d] (map #(Integer/parseInt %) (rest args))]
               (with-open [writer (io/writer "duelo.csv")]
                 (csv/write-csv writer (set/rename-keys
-                                       (duel amount (/ f-n f-d) (/ s-n s-d))
-                                       {:player-one "player-one" :player-two "player-two"}))))
+                                        (duel amount (/ f-n f-d) (/ s-n s-d))
+                                        {:player-one "player-one" :player-two "player-two"}))))
 
     "azar" (let [[amount v-one v-two] (map #(Integer/parseInt %) (rest args))
                  runs (repeatedly amount (fn [] (azar/azar v-one v-two)))

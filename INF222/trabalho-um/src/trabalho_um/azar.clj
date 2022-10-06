@@ -1,4 +1,5 @@
-(ns trabalho-um.azar (:gen-class))
+(ns trabalho-um.azar
+  (:gen-class))
 
 (defn toss-coin "Joga moeda" [] (rand-nth '(::head ::tail)))
 
@@ -18,10 +19,10 @@
 (defn azar
   "Define ganhador do jogo. Recebe a quantidade de dinheiro de cada."
   [first-amount second-amount]
-  (loop [ans {:v1 first-amount
-              :v2 second-amount
-              :winner ""
-              :rounds 1
+  (loop [ans {:v1        first-amount
+              :v2        second-amount
+              :winner    ""
+              :rounds    1
               :one-swaps 0
               :two-swaps 0}]
     (let [coin (toss-coin)]
