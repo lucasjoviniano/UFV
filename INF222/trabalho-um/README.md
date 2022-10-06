@@ -1,44 +1,53 @@
-# trabalho-um
+# Trabalho 1
 
-FIXME: description
+Código referente ao Trbalho Prático 1 da disciplina Computação Experimental.
 
-## Installation
+## Instalação
 
-Download from http://example.com/FIXME.
+Os arquivos compilados estão disponíveis em https://github.com/lucasjoviniano/UFV/releases.
 
 ## Usage
 
-FIXME: explanation
+1. **Duelo**: O duelo recebe 5 argumentos: 
+    - Quantidade de vezes para repetir
+    - Numerador da mira do primeiro duelista
+    - Denominador da mira do primeiro duelista
+    - Numerador da mira do segundo duelista
+    - Denominador da mira do segundo duelista
 
-    $ java -jar trabalho-um-0.1.0-standalone.jar [args]
+    ```bash
+    java -jar trabalho-um-0.1.0-standalone.jar 1000 4 6 5 6
+    ```
+    
+    A saída é um arquivo csv no seguinte formato:
+    ```csv
+    player-one, 893
+    player-two, 107
+    ```
+    
+    Onde os números indicam quantas vezes cada jogador ganhou
+2. **Truelo**: TODO
 
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2022 FIXME
-
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+3. **Azar**: O jogo de azar recebe 3 argumentos
+    - Quantidade de vezes para repetir
+    - Dinheiro do jogador A
+    - Dinheiro do jogador B
+    
+    ```bash
+    java -jar trabalho-um-0.1.0-standalone.jar 1000 3 7
+    ```
+    
+     A saída é um arquivo csv no seguinte formato:
+    ```csv
+    winner,rounds,one-swaps,two-swaps
+    segundo,12,0,0
+    primeiro,60,4,3
+    segundo,14,0,1
+    segundo,14,0,0
+    ```
+    
+    Onde:
+        - winner: Quem ganhou
+        - rounds: Quantas tiros até alguém ganhar
+        - one-swaps: Quantas vezes o jogador um passou a estar na frente
+        - two-swaps: Quantas vezes o jogador dois passou a estar na frente
