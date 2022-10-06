@@ -6,15 +6,15 @@
          '[clojure.set :as set])
 
 (defn get-probabilities
-  "Gera uma quantidade definina por amount de tentativas"
+  "Gera uma quantidade definida por amount de tentativas"
   [amount]
   (repeatedly amount rand))
 
 (defn duel-battle
   "Define qual jogador ganhou um duelo (qual acertou primeiro)"
   [amount player-one player-two]
-  (let [probs (partition 2 (get-probabilities amount))]
-    (loop [p probs]
+  (let [probabilities (partition 2 (get-probabilities amount))]
+    (loop [p probabilities]
       (cond
         (<= (ffirst p) player-one) :player-one
         (<= (second (first p)) player-two) :player-two
@@ -24,7 +24,7 @@
   (frequencies (repeatedly amount (fn [] (duel-battle amount player-one player-two)))))
 
 (defn -main
-  "Decide a atividade e escreve os resultados em arquivos .csv"
+  "Decide a atividade e escreve os resultados em arquivos \".csv\""
   [& args]
   (case (first args)
     "duelo" (let [[amount f-n f-d s-n s-d] (map #(Integer/parseInt %) (rest args))]
