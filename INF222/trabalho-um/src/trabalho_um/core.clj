@@ -40,11 +40,11 @@
         (case winner
           :player-one (:name p-one)
           :player-two (:name p-two)
-          :none (recur p-two p-one p-three (get-probabilities 2) true))
+          :none (recur p-one p-two p-three (get-probabilities 2) true))
         (case winner
           :player-one (recur p-three p-one p-two (get-probabilities 2) true)
           :player-two (recur p-three p-two p-one (get-probabilities 2) true)
-          :none (recur p-three p-one p-two (get-probabilities 2) false))
+          :none (recur p-three p-two p-one (get-probabilities 2) false))
         ))))
 
 (defn duel [amount player-one player-two]
