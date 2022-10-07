@@ -5,23 +5,31 @@
          '[trabalho-um.azar :as azar]
          '[clojure.set :as set])
 
+(defrecord Player [name aim alive])
+
 (defn get-probabilities
   "Gera uma quantidade definida por amount de tentativas"
   [amount]
   (repeatedly amount rand))
 
+(defn battle
+  [probability player-one player-two]
+  (cond
+    (<= (first probability) player-one) :player-one
+    (<= (second probability) player-two) :player-two
+    :else :none))
+
 (defn duel-battle
   "Define qual jogador ganhou um duelo (qual acertou primeiro)"
-  [amount player-one player-two]
-  (let [probabilities (partition 2 (get-probabilities amount))]
-    (loop [p probabilities]
-      (cond
-        (<= (ffirst p) player-one) :player-one
-        (<= (second (first p)) player-two) :player-two
-        :else (recur (rest p))))))
+  [player-one player-two]
+  (loop [p (get-probabilities 2)]
+    (let [winner (battle p player-one player-two)]
+      (if (= winner :none)
+        (recur (get-probabilities 2))
+        winner))))
 
 (defn duel [amount player-one player-two]
-  (frequencies (repeatedly amount (fn [] (duel-battle amount player-one player-two)))))
+  (frequencies (repeatedly amount (fn [] (duel-battle player-one player-two)))))
 
 (defn -main
   "Decide a atividade e escreve os resultados em arquivos \".csv\""
