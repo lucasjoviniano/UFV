@@ -1,6 +1,6 @@
 # Trabalho 1
 
-Código referente ao Trbalho Prático 1 da disciplina Computação Experimental.
+Código referente ao Trabalho Prático 1 da disciplina Computação Experimental.
 
 ## Instalação
 
@@ -16,7 +16,7 @@ Os arquivos compilados estão disponíveis em https://github.com/lucasjoviniano/
     - Denominador da mira do segundo duelista
 
     ```bash
-    java -jar trabalho-um-0.1.0-standalone.jar 1000 4 6 5 6
+    java -jar trabalho-um-0.1.0-standalone.jar duelo 1000 4 6 5 6
     ```
     
     A saída é um arquivo csv no seguinte formato:
@@ -26,7 +26,23 @@ Os arquivos compilados estão disponíveis em https://github.com/lucasjoviniano/
     ```
     
     Onde os números indicam quantas vezes cada jogador ganhou
-2. **Truelo**: TODO
+2. **Truelo**: O truelo recebe 5 argumentos
+    - Estratégia: 1 ou 2
+    - Quantidade de vezes que será realizado
+    - Mira do jogador A
+    - Mira do jogador B
+    - Mira do jogador C
+   
+    ```bash
+    java -jar trabalho-um-0.1.0-standalone.jar truelo 100000000 2 5 6 4 6 2 6
+    ```
+        
+     A saída é um arquivo csv no seguinte formato
+   ```csv
+   A, 389
+   B, 212
+   C, 384
+   ```
 
 3. **Azar**: O jogo de azar recebe 3 argumentos
     - Quantidade de vezes para repetir
@@ -34,7 +50,7 @@ Os arquivos compilados estão disponíveis em https://github.com/lucasjoviniano/
     - Dinheiro do jogador B
     
     ```bash
-    java -jar trabalho-um-0.1.0-standalone.jar 1000 3 7
+    java -jar trabalho-um-0.1.0-standalone.jar azar 1000 3 7
     ```
     
      A saída é um arquivo csv no seguinte formato:
@@ -47,7 +63,7 @@ Os arquivos compilados estão disponíveis em https://github.com/lucasjoviniano/
     ```
     
     Onde:
-        - winner: Quem ganhou
-        - rounds: Quantas tiros até alguém ganhar
-        - one-swaps: Quantas vezes o jogador um passou a estar na frente
-        - two-swaps: Quantas vezes o jogador dois passou a estar na frente
+      - winner: Quem ganhou
+      - rounds: Quantos tiros até alguém ganhar
+      - one-swaps: Quantas vezes o jogador um passou a estar na frente
+      - two-swaps: Quantas vezes o jogador dois passou a estar na frente
