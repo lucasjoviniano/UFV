@@ -7,10 +7,9 @@
 
 (defrecord Player [name aim])
 
-(defn get-probabilities
-  "Gera uma quantidade definida por amount de tentativas"
-  [amount]
-  (repeatedly amount rand))
+(defn get-probabilities []
+  "Gera uma tupla de tentativas"
+  (repeatedly 2 rand))
 
 (defn battle
   [probability player-one player-two]
@@ -22,10 +21,10 @@
 (defn duel-battle
   "Define qual jogador ganhou um duelo (qual acertou primeiro)"
   [player-one player-two]
-  (loop [p (get-probabilities 2)]
+  (loop [p (get-probabilities)]
     (let [winner (battle p player-one player-two)]
       (if (= winner :none)
-        (recur (get-probabilities 2))
+        (recur (get-probabilities))
         winner))))
 
 (defn strategy-one
@@ -33,18 +32,18 @@
   (loop [p-one player-one
          p-two player-two
          p-three player-three
-         probability (get-probabilities 2)
+         probability (get-probabilities)
          one-dead false]
     (let [winner (battle probability p-one p-two)]
       (if one-dead
         (case winner
           :player-one (:name p-one)
           :player-two (:name p-two)
-          :none (recur p-one p-two p-three (get-probabilities 2) true))
+          :none (recur p-one p-two p-three (get-probabilities) true))
         (case winner
-          :player-one (recur p-three p-one p-two (get-probabilities 2) true)
-          :player-two (recur p-three p-two p-one (get-probabilities 2) true)
-          :none (recur p-three p-two p-one (get-probabilities 2) false))
+          :player-one (recur p-three p-one p-two (get-probabilities) true)
+          :player-two (recur p-three p-two p-one (get-probabilities) true)
+          :none (recur p-three p-two p-one (get-probabilities) false))
         ))))
 
 (defn strategy-two
@@ -52,18 +51,18 @@
   (loop [p-one player-one
          p-two player-two
          p-three player-three
-         probability (get-probabilities 2)
+         probability (get-probabilities)
          one-dead false]
     (let [winner (battle probability p-one p-two)]
       (if one-dead
         (case winner
           :player-one (:name p-one)
           :player-two (:name p-two)
-          :none (recur p-one p-two p-three (get-probabilities 2) true))
+          :none (recur p-one p-two p-three (get-probabilities) true))
         (case winner
-          :player-one (recur p-three p-one p-two (get-probabilities 2) true)
-          :player-two (recur p-three p-two p-one (get-probabilities 2) true)
-          :none (recur p-one p-two p-three (get-probabilities 2) false))))))
+          :player-one (recur p-three p-one p-two (get-probabilities) true)
+          :player-two (recur p-three p-two p-one (get-probabilities) true)
+          :none (recur p-one p-two p-three (get-probabilities) false))))))
 
 (defn duel [amount player-one player-two]
   (frequencies (repeatedly amount (fn [] (duel-battle (Player. "A" player-one)
