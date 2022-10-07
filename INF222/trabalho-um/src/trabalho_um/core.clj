@@ -5,7 +5,7 @@
          '[trabalho-um.azar :as azar]
          '[clojure.set :as set])
 
-(defrecord Player [name aim alive])
+(defrecord Player [name aim])
 
 (defn get-probabilities
   "Gera uma quantidade definida por amount de tentativas"
@@ -15,8 +15,8 @@
 (defn battle
   [probability player-one player-two]
   (cond
-    (<= (first probability) player-one) :player-one
-    (<= (second probability) player-two) :player-two
+    (<= (first probability) (:aim player-one)) :player-one
+    (<= (second probability) (:aim player-two)) :player-two
     :else :none))
 
 (defn duel-battle
@@ -28,8 +28,28 @@
         (recur (get-probabilities 2))
         winner))))
 
+(defn strategy-one
+  [player-one player-two player-three]
+  (loop [p-one player-one
+         p-two player-two
+         p-three player-three
+         probability (get-probabilities 2)
+         one-dead false]
+    (let [winner (battle probability p-one p-two)]
+      (if one-dead
+        (case winner
+          :player-one (:name p-one)
+          :player-two (:name p-two)
+          :none (recur p-two p-one p-three (get-probabilities 2) true))
+        (case winner
+          :player-one (recur p-three p-one p-two (get-probabilities 2) true)
+          :player-two (recur p-three p-two p-one (get-probabilities 2) true)
+          :none (recur p-three p-one p-two (get-probabilities 2) false))
+        ))))
+
 (defn duel [amount player-one player-two]
-  (frequencies (repeatedly amount (fn [] (duel-battle player-one player-two)))))
+  (frequencies (repeatedly amount (fn [] (duel-battle (Player. "A" player-one)
+                                                      (Player. "B" player-two))))))
 
 (defn -main
   "Decide a atividade e escreve os resultados em arquivos \".csv\""
