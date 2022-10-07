@@ -90,7 +90,7 @@
                                         {:player-one "player-one" :player-two "player-two"}))))
 
     "truelo" (let [[amount s f-n f-d s-n s-d t-n t-d] (map #(Integer/parseInt %) (rest args))]
-               (with-open [writer (io/writer "truelo.csv")]
+               (with-open [writer (io/writer (format "truelo-%d.csv" s) )]
                  (csv/write-csv writer (truel s amount (/ f-n f-d) (/ s-n s-d) (/ t-n t-d)))))
 
 
