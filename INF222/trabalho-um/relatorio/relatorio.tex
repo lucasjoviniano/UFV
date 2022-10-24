@@ -1,0 +1,120 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Trabalho 1 - INF222}}
+\author{\huge{Lucas Joviniano - 9888}}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+\newpage
+\section{Duelo}
+
+Temos, por definição, que as porcentagens de sobrevivência de A e B
+são, respectivamente, $70,58\%$ e $29,41\%$. Aqui consideramos as precisões
+de A e B como $\frac{4}{6}$ e $\frac{5}{6}$
+
+Como podemos observar na tabela \ref*{table:pba}, as porcentagens 
+experimentais se mostraram próximas das obtidas de forma teórica, mostrando
+assim que a simulação é precisa o suficiente. 
+
+Na tabela \ref{table:pab}, que utiliza as porcentagens de precisão trocadas
+de A e B, podemos notar que se o primeiro a atirar for melhor, suas chances
+aumentam consideravelmente. 
+
+\begin{table}[h]
+    \caption{Porcentagem de Sobrevivência de A e B com B melhor}
+    \label{table:pba}
+    \centering
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Quantidade & A       & B       & A Sobrevive & B Sobrevive \\ \hline
+    1000       & 714     & 286     & 71,40\%     & 28,60\%     \\ \hline
+    10000      & 7064    & 2936    & 70,64\%     & 29,36\%     \\ \hline
+    100000     & 70592   & 29408   & 70,59\%     & 29,41\%     \\ \hline
+    1000000    & 705554  & 294446  & 70,56\%     & 29,44\%     \\ \hline
+    10000000   & 7057042 & 2942958 & 70,57\%     & 29,43\%     \\ \hline
+    \end{tabular}%
+    }
+\end{table}
+
+\begin{table}[h]
+    \caption{Porcentagem de Sobrevivência de A e B com A melhor}
+    \label{table:pab}
+    \centering
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    Quantidade & A       & B       & \% A    & \% B    \\ \hline
+    1000       & 872     & 128     & 87,20\% & 12,80\% \\ \hline
+    10000      & 8811    & 1189    & 88,11\% & 11,89\% \\ \hline
+    100000     & 88285   & 11715   & 88,29\% & 11,72\% \\ \hline
+    1000000    & 882158  & 117842  & 88,22\% & 11,78\% \\ \hline
+    10000000   & 8824177 & 1175823 & 88,24\% & 11,76\% \\ \hline
+    \end{tabular}%
+    }
+\end{table}
+\newpage
+\section{Truelo}
+
+No Truelo, são usadas as precisões $\frac{4}{6}$, $\frac{5}{6}$, $\frac{2}{6}$ para A, B e C, 
+respectivamente.
+Podemos notar na figura \ref*{fig:t1} que A e C ganham a maior parte dos confrontos.
+Mesmo B tendo uma precisão melhor, o duelo de A e B normalmente resulta em alguém morto,
+assim C inicia a maioria dos duelos.
+
+Considerando a Estratégia 2, com resultados mostrados na figura \ref{fig:t2}, C esperar
+o confronto acabar entre A e B acabar aumenta levemente suas chances de ficar vivo.
+
+\begin{figure}[h]
+    \caption{Truelo com a Estratégia 1}
+    \label{fig:t1}
+    \centering
+    \includegraphics[width=0.5\textwidth]{truelo-um.png}
+    \end{figure}
+\begin{figure}[h]
+    \caption{Truelo com Estratégia 2}
+    \label{fig:t2}
+    \centering
+    \includegraphics[width=0.5\textwidth]{truelo-dois.png}
+    \end{figure}
+\newpage
+
+\section{Azar}
+
+No jogo de azar, utilizamos $10^4$ partidas para os testes. Podemos ver pela tabela
+\ref{table:azar} e pela figura \ref{fig:azar}, que quem começa com mais dinheiro tende a vencer mais vezes.
+Além disso, podemos ver que o número de rodadas escala muito rápido quando aumenta
+o valor de início dos participantes. Quando aumentamos os valores em 10x, o número
+de rodada aumenta em 91x. Para essa medida utilizamos a mediana pois o desvio padrão
+é muito alto, então não seria uma boa medida de centro.
+
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[h]
+    \caption{Informações Sobre partidas do Jogo de Azar}
+    \label{table:azar}
+    \centering
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    A  & B  & A Venceu & B Venceu & Mediana de Rodadas & Desvio Padrão de Rodadas \\ \hline
+    3  & 7  & 29937    & 70063    & 16.0               & 19.83                    \\ \hline
+    30 & 70 & 29972    & 70028    & 1463.0             & 2019.55                  \\ \hline
+    10 & 10 & 49970    & 50030    & 77.0               & 81.74                    \\ \hline
+    \end{tabular}%
+    }
+\end{table}
+\begin{figure}[h]
+    \caption{Quantidade de Vitórias no Jogo de Azar}
+    \label{fig:azar}
+    \centering
+    \includegraphics[width=0.5\textwidth]{winners.png}
+    \end{figure}
+\newpage
+\end{document}

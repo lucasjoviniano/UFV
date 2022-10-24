@@ -1,0 +1,106 @@
+; This is the Calva evaluation results output window.
+; TIPS: The keyboard shortcut `ctrl+alt+o o` shows and focuses this window
+;   when connected to a REPL session.
+; Please see https://calva.io/output/ for more info.
+; Happy coding! ♥️
+
+; Jacking in...
+; Starting Jack-in Terminal: lein update-in :dependencies conj '[nrepl,"1.0.0"]' -- update-in :plugins conj '[cider/cider-nrepl,"0.28.5"]' -- update-in '[:repl-options,:nrepl-middleware]' conj '["cider.nrepl/cider-middleware"]' -- repl :headless
+()
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉trabalho-um.core꞉>  ; Use `alt+enter` to evaluate
+; Jack-in done.
+clj꞉trabalho-um.core꞉> 
+; Aborting connect, error determining connect sequence.
+; Aborting connect, error determining connect sequence.
+; Connecting ...
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉trabalho-um.core꞉> 
+(duel-battle 10 (/ 5 6) (/ 4 6))
+; Execution error (NullPointerException) at trabalho-um.core/battle (core.clj:18).
+; Cannot invoke "Object.getClass()" because "x" is null
+clj꞉trabalho-um.core꞉> 
+clojure.lang.Numbers/ops (Numbers.java:1095)
+clojure.lang.Numbers/lte (Numbers.java:257)
+trabalho-um.core/battle (core.clj:18)
+trabalho-um.core/battle (core.clj:15)
+trabalho-um.core/duel-battle (core.clj:28)
+trabalho-um.core/duel-battle (core.clj:23)
+trabalho-um.core/eval6277 (form-init3459674671871033443.clj:35)
+clojure.lang.Compiler/eval (Compiler.java:7194)
+clojure.core/eval (core.clj:3215)
+clojure.core/eval (core.clj:3211)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:87)
+clojure.core/apply (core.clj:667)
+clojure.core/with-bindings* (core.clj:1990)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:87)
+clojure.main/repl (main.clj:437)
+clojure.main/repl (main.clj:458)
+clojure.main/repl (main.clj:368)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:84)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:56)
+nrepl.middleware.interruptible-eval/interruptible-eval (interruptible_eval.clj:152)
+nrepl.middleware.session/session-exec (session.clj:218)
+nrepl.middleware.session/session-exec (session.clj:217)
+java.lang.Thread/run (Thread.java:833)
+clj꞉trabalho-um.core꞉> 
+; nREPL Connection was closed
+; Aborting connect, error determining c
+; Aborting connect, error determining connect sequence.
+; Connecting ...
+; No nrepl port file found.
+; Bad url: localhost:
+; Jacking in...
+; Starting Jack-in Terminal: lein update-in :dependencies conj '[nrepl,"1.0.0"]' -- update-in :plugins conj '[cider/cider-nrepl,"0.28.5"]' -- update-in '[:repl-options,:nrepl-middleware]' conj '["cider.nrepl/cider-middleware"]' -- with-profile +uberjar repl :headless
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉trabalho-um.core꞉> 
+; Jack-in done.
+clj꞉trabalho-um.core꞉> 
+(duel-battle 10 (/ 5 6) (/ 4 6))
+; Execution error (NullPointerException) at trabalho-um.core/battle (core.clj:18).
+; Cannot invoke "Object.getClass()" because "x" is null
+clj꞉trabalho-um.core꞉> 
+clojure.lang.Numbers/ops (Numbers.java:1095)
+clojure.lang.Numbers/lte (Numbers.java:257)
+trabalho-um.core/battle (core.clj:18)
+trabalho-um.core/duel-battle (core.clj:23)
+trabalho-um.core/eval7854 (form-init3795691088655074536.clj:83)
+clojure.lang.Compiler/eval (Compiler.java:7194)
+clojure.core/eval (core.clj:3215)
+clojure.core/eval (core.clj:3211)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:87)
+clojure.core/apply (core.clj:667)
+clojure.core/with-bindings* (core.clj:1990)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:87)
+clojure.main/repl (main.clj:437)
+clojure.main/repl (main.clj:458)
+nrepl.middleware.interruptible-eval/evaluate (interruptible_eval.clj:115)
+nrepl.middleware.interruptible-eval/interruptible-eval (interruptible_eval.clj:150)
+nrepl.middleware.session/session-exec (session.clj:218)
+nrepl.middleware.session/session-exec (session.clj:217)
+java.lang.Thread/run (Thread.java:833)
+clj꞉trabalho-um.core꞉> 

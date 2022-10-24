@@ -32,6 +32,7 @@ Os arquivos compilados estão disponíveis em https://github.com/lucasjoviniano/
     - Mira do jogador A
     - Mira do jogador B
     - Mira do jogador C
+   É considerado que o jogador com maior mira é o primeiro
    
     ```bash
     java -jar trabalho-um-0.1.0-standalone.jar truelo 100000000 2 5 6 4 6 2 6
