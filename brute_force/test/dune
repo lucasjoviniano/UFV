@@ -1,0 +1,4 @@
+(test
+ (name brute_force)
+ (libraries bubble_sort alcotest))
+

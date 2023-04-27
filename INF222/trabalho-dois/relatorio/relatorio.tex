@@ -1,0 +1,149 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Trabalho 2 - INF222}}
+\author{\huge{Lucas Joviniano - 98888}}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+\newpage
+\section{Introdução}
+
+O intuito desse trabalho é mostrar a qualidade da Internet Banda Larga provida pela Claro Brasil e, além disso, medir também o nível de confiança mostrado por alguns medidores de velocidade online. A qualidade da internet vinda do ISP será medida com base na regra da Anatel, e a comparação entre provedores será feita entre si.
+
+\section{Métodos}
+
+A coleta dos dados foi feita utilizando um script escrito por mim. Ele foi responsável por coletar medidas de três provedores: \href{https://www.speedtest.net/}{Speedtest}, \href{https://fast.com/pt/}{Fast} e \href{https://www.brasilbandalarga.com.br/}{Brasil Banda Larga}. Ele coletava as informações a cada 30 minutos (enquanto estivesse rodando).
+
+\begin{table}[!h]
+    \begin{center}
+        \caption{Exemplos dos dados coletados.}
+        \begin{tabular}{llllrrl}
+            \toprule
+            {} &             Service &        Date &   Hour &    Download &      Upload &                         Network \\
+            \midrule
+            0 &           Speedtest &  17-11-2022 &  14:08 &    4.463313 &    2.774070 &  Universidade Federal De Vicosa \\
+            1 &                Fast &  17-11-2022 &  14:09 &   13.000000 &    7.800000 &  Universidade Federal De Vicosa \\
+            2 &  Brasil Banda Larga &  17-11-2022 &  14:10 &   14.890000 &    3.390000 &  Universidade Federal De Vicosa \\
+            3 &           Speedtest &  17-11-2022 &  15:36 &  243.975113 &  123.067125 &                    Claro Brazil \\
+            4 &                Fast &  17-11-2022 &  15:37 &  560.000000 &  200.000000 &                    Claro Brazil \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\begin{figure}[h]
+    \caption{Medidas de Velocidade}
+    \centering
+    \includegraphics[width=0.8\textwidth]{datapoints.png}
+\end{figure}
+
+\newpage
+\newpage
+
+
+\section{Medidas de Velocidade}
+
+Com os dados coletados, foi possível começar a análise de velocidade do provedor. Aqui utilizamos exclusivamente as medidas feitas pelo Speedtest e no provedor Claro Brazil. Extraindo as medidas de centro utilizando Python, chegamos nos seguintes valores:
+
+\begin{table}[!h]
+    \begin{center}
+    \caption{Medidas de Centro para Download e Upload.}
+    \begin{tabular}{lrr}
+        \toprule
+        {}            & Download  & Upload   \\
+        \midrule
+        Média         & 320.2039  & 199.6138 \\
+        Mediana       & 329.8081  & 216.5266 \\
+        Desvio Padrão & 70.1970   & 47.7353  \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+\end{table}
+
+
+Além disso, podemos obter os intervalos de confiança considerando ou não que a média segue uma distribuição normal. Nesse caso, temos os seguintes valores.
+
+\begin{table}[!h]
+    \begin{center}
+    \caption{Intervalos de Confiança de 95\% para Download e Upload}
+    \begin{tabular}{rcc}
+        \toprule
+        Intervalo            & Download  & Upload   \\
+        \midrule
+        Distribuição Normal & $301.98059 \leq \mu \leq 338.4273$ & $187.2216 \leq \mu \leq 212.0061$ \\
+        Sem Distribuição Normal & $307.45033 \leq \mu \leq 360.3520$ & $158.8389 \leq \mu \leq 208.3415$ \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+\end{table}
+
+No contrato com o ISP temos uma velocidade contratada de 500 MB de Download e 300 MB de upload. Sendo assim, o mínimo instantâneo pela regra da Anatel seria 200 MB de Download e 120 MB de Upload e o mínimo médio seria 400 MB de Download e 240 de Upload.
+
+Contando as medições, podemos perceber que a regra da velocidade mínima instantânea só é quebrada (ou seja, a velocidade recebida está abaixo do mínimo) em 3 medidas para o Download e 1 para o Upload. Logo, está sendo devidamente cumprida.
+
+Já para a velocidade média mensal, temos que a velocidade está consideravelmente abaixo do desejado.
+
+\section{Comparação de Medidores}
+
+É importante notar que diferentes medidores dariam resultados diferentes. Foram realizadas também medições com o Fast e o Brasil Banda larga, cujas medidas de centro podem ser conferidas abaixo (apenas para a velocidade de Download).
+
+\begin{table}[!h]
+    \begin{center}
+    \caption{Medidas de Centro para Download e Upload.}
+    \begin{tabular}{lccc}
+        \toprule
+        {}            & Speedtest & Fast      & Brasil Banda Larga\\
+        \midrule
+        Média         & 320.2039  & 510.0000  & 350.8115 \\
+        Mediana       & 329.8081  & 500.0000  & 402.5200 \\
+        Desvio Padrão & 70.1970   & 144.6608  & 101.4998 \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+\end{table}
+
+\begin{figure}[h]
+    \caption{Boxplot dos diferentes medidores}
+    \centering
+    \includegraphics[width=0.5\textwidth]{boxplot.png}
+    \end{figure}
+
+Podemos definir intervalos de confiança de 95\%, com a hipótese de que as médias são iguais. Aqui estamos comparando apenas o Speedtest e o Brasil Banda Larga. Assim, temos como intervalo de confiança para o Download:
+
+\[
+    6.596951 \leq \mu \leq 54.618219
+\]
+
+Como 0 não se encontra dentro do intervalo, sabemos que as médias não são iguais.
+
+Além disso, é interessante notar que os dados do Fast parecem inflados em relação aos outros. Sua média é maior que a velocidade contratada que é, inclusive, a mediana. Porém seu desvio padrão é o mais alto dos medidos.
+
+Podemos realizar um teste de Kruskal-Wallis para determinar se a distribuição dos medidores são iguais. Realizando os cálculos no Python, temos que $ H = 77.4061 $, o que indica uma grande diferença nas distribuições amostrais.
+
+\newpage
+
+\section{Comparação de Provedores}
+
+Utilizando os dados de um colega, também foi possível realizar a comparação das médias entre diferentes provedores. Aqui serão comparadas apenas as velocidades de Downloads. Precisamos, primeiro, verificar se as velocidades dos provedores seguem uma distribuição normal.
+
+\begin{figure}[h]
+    \caption{Q-Q Plots dos Provedores}
+    \centering
+    \includegraphics[width=0.7\textwidth]{qqplots.png}
+\end{figure}
+
+Utilizando o teste de normalidade de Shapiro-Wilk, obtemos que nenhuma das distribuições de velocidades de Download é normal. Pelo Teorema do Limite Central, podemos dizer que a distribuição das médias da velocidade de Download medidos por mim segue uma distribuição normal. Porém, como a outra amostra tem $n = 15$, não é possível afirmar o mesmo sobre ela. Porém, ainda é possível comparar suas médias utilizando o teste da soma dos postos de Mann-Whitney-Wilcoxon. Aqui nós temos um valor-p de $0.9999999994011096$, o que indica que certamente a internet provida pela Claro é melhor que a do outro provedor.
+
+\section{Conclusão}
+
+Dito isso, podemos notar que a qualidade média da internet não é a esperada. Porém, é importante ressaltar que ela é dividida com mais 3 pessoas, que poderiam estar realizando atividades intensivas em rede durante alguma medição. Além disso, a conexão por wi-fi pode afetar a velocidade recebida.
+
+Outo ponto a ser notado é a diferença entre os medidores. O Speedtest e o Brasil Banda Larga mostram resultados que parecem ser mais reais, com variações de velocidade durante o dia e uma conexão abaixo da teórica. Já o Fast traz medidas extremamente altas, com uma média inclusive maior do que a velocidade contratada.
+
+\end{document}

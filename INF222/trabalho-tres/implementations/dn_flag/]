@@ -1,0 +1,21 @@
+use std::mem::swap;
+
+fn djikstra_dutch(unordered: Vec<f32>) -> Vec<f32> {
+    let mut i = 0;
+    let mut j = 0;
+    let mut k = unordered.len() - 1;
+    let mid: f32 = 0.0;
+    let mut values = unordered.clone();
+
+    while j <= k {
+        if values[j] <= mid {
+            swap(&values[i], &values[j]);
+        }
+    }
+
+    values
+}
+
+fn main() {
+    println!("Hello, world!");
+}

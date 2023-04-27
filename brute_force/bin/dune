@@ -1,0 +1,4 @@
+(executable
+ (public_name brute_force)
+ (name main)
+ (libraries brute_force))
